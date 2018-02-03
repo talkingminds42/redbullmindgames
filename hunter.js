@@ -103,7 +103,7 @@ function preload() {
   game.load.image('titre', 'assets/jagerhunter.png');
   game.load.image('background', 'assets/background.png');
   game.load.image('light', 'assets/bloc_light.png');
-  game.load.image('reverse', 'assets/bloc_reverse.png');
+  game.load.spritesheet('reverse', 'assets/bloc_reverse.png', 100, 100, 4);
   game.load.image('umbrella', 'assets/bloc_umbrella.png');
   game.load.image('fast', 'assets/bloc_fast.png');
   game.load.image('slow', 'assets/bloc_slow.png');

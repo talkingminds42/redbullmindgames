@@ -129,6 +129,8 @@ function playerclear()
   else if (yep == 8){
       reverseitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'reverse');
       reverseitem.scale.setTo(0.5, 0.5);
+      var tornado = reverseitem.animations.add('tornado');
+      reverseitem.animations.play('tornado', 6, true);
       reverse = reverse == 0 ? 1 : 0;
       losing = 1;
       map[player.y][player.x] = 1;

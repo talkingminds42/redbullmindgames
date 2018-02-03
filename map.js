@@ -426,7 +426,10 @@ function drawMap() {
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'light').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 8){
-            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse').scale.setTo(0.5, 0.5);
+            tornado = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse');
+            tornado.scale.setTo(0.5, 0.5);
+            var tor = tornado.animations.add('animation');
+            tornado.animations.play('animation', 6, true);
         }
         else if (map[y][x] == 9){
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'umbrella').scale.setTo(0.5, 0.5);
