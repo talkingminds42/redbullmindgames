@@ -305,7 +305,7 @@ var Airstate = {
 
           if (reverse == 0) {
               if (swipe == 0)
-                  EndSwipe();
+                  EndSwipe(reverse);
               if (this.cursors.left.isDown && onepress == 1){
                   dir.x = -1;
                   move(dir);
@@ -328,6 +328,8 @@ var Airstate = {
               }
           }
           else {
+              if (swipe == 0)
+                EndSwipe(reverse);
               if (this.cursors.right.isDown && onepress == 1){
                   dir.x = -1;
                   move(dir);
@@ -392,6 +394,7 @@ var mc;
 var swipe = 0;
 
 function create() {
+  console.log("yolyo");
   document.getElementById("body").addEventListener("click", ClickEvent);
   game.input.addPointer();
   game.input.onUp.add(function ()
@@ -496,164 +499,6 @@ var start_mouse_y = 0;
 
 
 function update() {
-console.log("game state:" + gameState+ "\n" + "gamePreviousState" + gamePreviousState);
-
-if (swipe == 1)
-    LaunchSwipe();
-else {
-  if (gameState == 0) {
-
-  }
-  else if (gameState == 1) {
-  if (tutorial < 6){
-    if ((enterK.isDown || isTap) && onepress == 1){
-			updateTutorial();
-			onepress=2;
-            isTap = 2;
-		}
-    if (enterK.isUp || isTap == 2) {
-			onepress = 1;
-            isTap = 0;
-		}
-  }
-  else if (tutorial > 6 && (tutorial % 2) == 1)
-    updateTutorial();
-else if (enterK.isDown && onepress == 1){
-	cheat++;
-}
-else if (cheat > 20){
-	cheat = 0;
-	victory();
-	onpress = 1;
-}
-  else if (losing == 0){
-    dir.x = 0;
-    dir.y = 0;
-
-    if (reverse == 0) {
-        if (this.cursors.left.isDown && onepress == 1){
-            dir.x = -1;
-            move(dir);
-            onepress = 3;
-        }
-        if (this.cursors.right.isDown && onepress == 1){
-            dir.x = 1;
-            move(dir);
-            onepress = 4;
-        }
-        if (this.cursors.up.isDown && onepress == 1){
-            dir.y = -1;
-            move(dir);
-            onepress = 5;
-        }
-        if (this.cursors.down.isDown && onepress == 1){
-            dir.y = 1;
-            move(dir);
-            onepress = 2;
-        }
-    }
-    else {
-        if (this.cursors.right.isDown && onepress == 1){
-            dir.x = -1;
-            move(dir);
-            onepress = 3;
-        }
-        if (this.cursors.left.isDown && onepress == 1){
-            dir.x = 1;
-            move(dir);
-            onepress = 4;
-        }
-        if (this.cursors.down.isDown && onepress == 1){
-            dir.y = -1;
-            move(dir);
-            onepress = 5;
-        }
-        if (this.cursors.up.isDown && onepress == 1){
-            dir.y = 1;
-            move(dir);
-            onepress = 2;
-        }
-    }
-    if (onepress == 2 && this.cursors.down.isUp) {
-      onepress = 1;
-    }
-    else if (tutorial > 6 && (tutorial % 2) == 1)
-      updateTutorial();
-    else if (enterK.isDown && onepress == 1){
-      cheat++;
-    }
-    else if (cheat > 420){
-      cheat = 0;
-      victory();
-      onpress = 1;
-    }
-    if (losing == 0){
-      dir.x = 0;
-      dir.y = 0;
-
-      if (reverse == 0) {
-          if (swipe == 0)
-              EndSwipe();
-          if (this.cursors.left.isDown && onepress == 1){
-              dir.x = -1;
-              move(dir);
-              onepress = 3;
-          }
-          if (this.cursors.right.isDown && onepress == 1){
-              dir.x = 1;
-              move(dir);
-              onepress = 4;
-          }
-          if (this.cursors.up.isDown && onepress == 1){
-              dir.y = -1;
-              move(dir);
-              onepress = 5;
-          }
-          if (this.cursors.down.isDown && onepress == 1){
-              dir.y = 1;
-              move(dir);
-              onepress = 2;
-          }
-      }
-      else {
-          if (this.cursors.right.isDown && onepress == 1){
-              dir.x = -1;
-              move(dir);
-              onepress = 3;
-          }
-          if (this.cursors.left.isDown && onepress == 1){
-              dir.x = 1;
-              move(dir);
-              onepress = 4;
-          }
-          if (this.cursors.down.isDown && onepress == 1){
-              dir.y = -1;
-              move(dir);
-              onepress = 5;
-          }
-          if (this.cursors.up.isDown && onepress == 1){
-              dir.y = 1;
-              move(dir);
-              onepress = 2;
-          }
-      }
-      if (onepress == 2 && this.cursors.down.isUp) {
-        onepress = 1;
-      }
-      if (onepress == 3 && this.cursors.left.isUp) {
-        onepress = 1;
-      }
-      if (onepress == 4 && this.cursors.right.isUp) {
-        onepress = 1;
-      }
-      if (onepress == 5 && this.cursors.up.isUp) {
-        onepress = 1;
-      }
-    }
-}
-}
-
-}
 }
 
 
