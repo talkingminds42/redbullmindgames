@@ -1,3 +1,6 @@
+var tab_score = new Array(30); // nombre de niveau
+tab_score.fill(-1);
+
 // init map
 var maps = [
 [//1

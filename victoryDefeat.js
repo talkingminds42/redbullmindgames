@@ -7,11 +7,17 @@ function victory(){
       if (level < levelmax) {
         hide = 0;
         resetButton();
+        var tmp = 100 + parseInt(60 + 10 * level - timer.seconds)
+        score += tmp;
+        if (tab_score[level] < tmp)
+            tab_score[level] = tmp;
+        scoreText.text = 'Score: ' + score;
+        console.log(tab_score);
         level++;
         tutorial++;
         destroying();
-        score += 100;
-       scoreText.text = 'Score: ' + score;
+       timer.destroy();
+       timer = -1;
         create();
       }
     });
@@ -42,6 +48,8 @@ function defeat(){
         hide = 0;
         destroying();
         score -= 20;
+        if (score < 0)
+            score = 0;
         scoreText.text = 'Score: ' + score;
         create();
       });
