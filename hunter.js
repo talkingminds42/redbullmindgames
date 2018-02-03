@@ -10,12 +10,12 @@ var Column = 16;
 
 // init display
 var display;
-var light = 0;
+var sun = 0;
 var speed = 1;
 
 // init player
 var player = { x:0, y:0};
-var jager;
+var hera;
 
 //init margin
 var M_top = 100;
@@ -36,7 +36,7 @@ var text;
 
 var groupblock;
 var grouphidden;
-var grouplight;
+var groupsun;
 var groupgamer;
 var groupdiamonds;
 var groupoverdiamond;
@@ -71,8 +71,8 @@ var umbrella = 0;
 var umbrellaitem;
 var umbrellaButton;
 
-// bomb initialise
-var bombitem;
+// storm initialise
+var stormitem;
 
 //lock initialise
 var lockitem;
@@ -114,47 +114,26 @@ var bootstate = {
 var Airstate = {
 
   preload: function () {
-    game.load.image('tile', 'assets/bloc_empty.png');
-    game.load.image('hole', 'assets/bloc_black.png');
-    game.load.spritesheet('bomb', 'assets/lightning.png', 100, 100, 4);
-    game.load.image('lightning_light', 'assets/lightning_light.png');
-    game.load.image('diamond_red', 'assets/bloc_diamond_red.png');
-    game.load.spritesheet('jager', 'assets/Hera.png', 100, 100, 11);
-    game.load.image('lock', 'assets/bloc_locker.png');
-    game.load.image('key', 'assets/bloc_key.png');
+    game.load.image('tile', 'assets/Air/cloud.png');
+    game.load.image('hole', 'assets/Air/bloc_black.png');
+    game.load.spritesheet('storm', 'assets/Air/lightning.png', 100, 100, 4);
+    game.load.image('lightning_light', 'assets/Air/lightning_light.png');
+    game.load.image('stone', 'assets/Air/AirTab.png');
+    game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);
+    game.load.image('lock', 'assets/Air/bloc_locker.png');
+    game.load.image('key', 'assets/Air/bloc_key.png');
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
-    game.load.image('hide', 'assets/bloc_hidden.png');
+    game.load.image('hide', 'assets/Air/bloc_hidden.png');
     game.load.image('titre', 'assets/jagerhunter.png');
-    game.load.image('background', 'assets/background.png');
-    game.load.image('light', 'assets/bloc_light.png');
-    game.load.spritesheet('reverse', 'assets/bloc_reverse.png', 100, 100, 4);
-    game.load.image('umbrella', 'assets/bloc_umbrella.png');
-    game.load.image('fast', 'assets/bloc_fast.png');
-    game.load.image('slow', 'assets/bloc_slow.png');
-    game.load.image('break', 'assets/bloc_break.png');
-    game.load.image('button_umbrella', 'assets/button_umbrella.png');
-    game.load.image('light', 'assets/bloc_light.png');
-    game.load.image('slow', 'assets/bloc_slow.png');
-    game.load.image('fast', 'assets/bloc_fast.png');
-    game.load.image('arrow', 'assets/arrowred.png');
+    game.load.spritesheet('reverse', 'assets/Air/bloc_reverse.png', 100, 100, 4);
+    game.load.image('umbrella', 'assets/Air/bloc_umbrella.png');
+    game.load.image('sun', 'assets/Air/bloc_light.png');
     game.load.image('credits', 'assets/button_info.png');
-    game.load.image('diamond_blue', 'assets/bloc_diamond_blue.png');
-    game.load.image('diamond_green', 'assets/bloc_diamond_green.png');
-    game.load.image('diamond_orange', 'assets/bloc_diamond_orange.png');
-    game.load.image('diamond_yellow', 'assets/bloc_diamond_yellow.png');
-    game.load.image('diamond_white', 'assets/bloc_diamond_white.png');
-    game.load.image('diamond_violet', 'assets/bloc_diamond_violet.png');
-    game.load.image('d_red', 'assets/diamond_red_new.png');
-    game.load.image('d_blue', 'assets/diamond_blue.png');
-    game.load.image('d_green', 'assets/diamond_green.png');
-    game.load.image('d_orange', 'assets/diamond_orange.png');
-    game.load.image('d_yellow', 'assets/diamond_yellow.png');
-    game.load.image('d_white', 'assets/diamond_white.png');
-    game.load.image('d_violet', 'assets/diamond_violet.png');
-    game.load.image('d_check', 'assets/diamond_check.png');
-    game.load.image('d_wrong', 'assets/diamond_wrong.png');
     game.load.image('about', 'assets/aboutus.png');
+    game.load.image('background', 'assets/background.png');
+    game.load.image('d_red', 'assets/Air/AirTab.png');
+    game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
   },
 
@@ -175,7 +154,7 @@ var Airstate = {
     copyMap();
     groupblock = game.add.group();
     grouphidden=game.add.group();
-    grouplight=game.add.group();
+    groupsun=game.add.group();
     groupgamer=game.add.group();
     groupdiamonds=game.add.group();
     groupoverdiamond=game.add.group();
@@ -185,10 +164,10 @@ var Airstate = {
       drawMap();
     else
       hideMap();
-    jager = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'jager');
-    jager.scale.setTo(0.5, 0.5);
-    var animation = jager.animations.add('animation');
-    jager.animations.play('animation', 10, true);
+    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
+    hera.scale.setTo(0.5, 0.5);
+    var animation = hera.animations.add('animation');
+    hera.animations.play('animation', 10, true);
     if (createinit == 0)
     {
       createinit = 1;
@@ -204,7 +183,7 @@ var Airstate = {
       arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
       game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
       credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-      text = game.add.text(M_left + 115, M_top + 625, "Hello Jager Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
+      text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
       console.log('Test');
     }
     game.input.onTap.add(onTap, this);
@@ -410,7 +389,7 @@ function create() {
   copyMap();
   groupblock = game.add.group();
   grouphidden=game.add.group();
-  grouplight=game.add.group();
+  groupsun=game.add.group();
   groupgamer=game.add.group();
   groupdiamonds=game.add.group();
   groupoverdiamond=game.add.group();
@@ -420,10 +399,10 @@ function create() {
     drawMap();
   else
     hideMap();
-  jager = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'jager');
-  jager.scale.setTo(0.5, 0.5);
-  var animation = jager.animations.add('animation');
-  jager.animations.play('animation', 10, true);
+  hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
+  hera.scale.setTo(0.5, 0.5);
+  var animation = hera.animations.add('animation');
+  hera.animations.play('animation', 10, true);
   if (createinit == 0)
   {
     createinit = 1;
@@ -439,7 +418,7 @@ function create() {
     arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
     game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
     credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-    text = game.add.text(M_left + 115, M_top + 625, "Hello Jager Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
+    text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
     console.log('Test');
   }
   game.input.onTap.add(onTap, this);
@@ -479,8 +458,8 @@ function resetButton(){
 function destroying(){
   groupblock.removeAll();
   grouphidden.removeAll();
-  if (light == 1){
-    grouplight.removeAll();
+  if (sun == 1){
+    groupsun.removeAll();
   }
   groupdiamonds.removeAll();
   draw_rectangle();

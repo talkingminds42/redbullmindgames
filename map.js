@@ -408,13 +408,13 @@ function drawMap() {
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 3){
-            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_red').scale.setTo(0.5, 0.5);
+            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'stone').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 4){
-            bomb = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'bomb');
-            bomb.scale.setTo(0.5, 0.5);
-            var lighting = bomb.animations.add('animation');
-            bomb.animations.play('animation', 6, true);
+            storm = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'storm');
+            storm.scale.setTo(0.5, 0.5);
+            var lighting = storm.animations.add('animation');
+            storm.animations.play('animation', 6, true);
         }
         else if (map[y][x] == 5){
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'key').scale.setTo(0.5, 0.5);
@@ -423,7 +423,7 @@ function drawMap() {
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'lock').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 7){
-            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'light').scale.setTo(0.5, 0.5);
+            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'sun').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 8){
             tornado = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse');

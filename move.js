@@ -1,7 +1,7 @@
 function move(dir){
-  //check light
-  if (light == 1)
-  grouplight.removeAll();
+  //check sun
+  if (sun == 1)
+  groupsun.removeAll();
   //check si mouvement possible
   if (canGo(dir) == 1)
     return (0);
@@ -24,22 +24,22 @@ function move(dir){
 
 function PlayerMove(dir){
 
-  jagerleft = ((player.x * 50) + M_left)//jager.world.x;
-  jagertop = ((player.y * 50) + M_top)//jager.world.y;
+  heraleft = ((player.x * 50) + M_left)//hera.world.x;
+  heratop = ((player.y * 50) + M_top)//hera.world.y;
   losing++;
   if (dir.x == -1)
-    jagerleft = (jagerleft - 50);
+    heraleft = (heraleft - 50);
 
   if (dir.x == 1)
-    jagerleft = jagerleft + 50;
+    heraleft = heraleft + 50;
 
   if (dir.y == -1)
-    jagertop = jagertop - 50;
+    heratop = heratop - 50;
 
   if (dir.y == 1)
-    jagertop = jagertop + 50;
+    heratop = heratop + 50;
 
-  var demoTween = game.add.tween(jager).to({x:jagerleft,y:jagertop},300);
+  var demoTween = game.add.tween(hera).to({x:heraleft,y:heratop},300);
   demoTween.onComplete.addOnce(function(){
     if (trap == 1 && map[player.y][player.x] != 12)
     {
@@ -71,7 +71,7 @@ function playerclear()
       grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
   }
   else if (yep == 3){
-      diamond = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'diamond_red');
+      diamond = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'stone');
       diamond.scale.setTo(0.5, 0.5);
       checkDiamond(yep);
       map[player.y][player.x] = 1;
@@ -82,10 +82,10 @@ function playerclear()
       Tweendiamond.start();
   }
   else if (yep == 4){
-      bombitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'bomb');
-      bombitem.scale.setTo(0.5, 0.5);
-      var lighting = bombitem.animations.add('animation');
-      bombitem.animations.play('animation', 6, true);
+      stormitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'storm');
+      stormitem.scale.setTo(0.5, 0.5);
+      var lighting = stormitem.animations.add('animation');
+      stormitem.animations.play('animation', 6, true);
   }
   else if (yep == 5){
       keyitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'key');
@@ -121,17 +121,17 @@ function playerclear()
       }
   }
   else if (yep == 7){
-    lighty = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
-    light = 1;
+    suny = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
+    sun = 1;
     //losing = 0;
-    showlight();
+    showsun();
     map[player.y][player.x] = 1;
-    //var Tweenkey = game.add.tween(lighty).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
+    //var Tweenkey = game.add.tween(suny).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
     //Tweenkey.onComplete.addOnce(function(){
       //grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
       //losing = 0;
     //});
-    //showlight();
+    //showsun();
 
   }
   else if (yep == 8){
