@@ -200,8 +200,11 @@ var Airstate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
-    timer = game.time.create(false);
-    timer.start();
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
@@ -686,6 +689,11 @@ var Earthstate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
@@ -924,6 +932,11 @@ var Firestate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
