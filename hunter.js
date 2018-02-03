@@ -1,3 +1,5 @@
+
+
 var gameState = 0;
 var gamePreviousState = 0;
 // Tile size
@@ -119,6 +121,7 @@ var bootstate = {
 
 };
 
+var timer = -1;
 
 var Airstate = {
 
@@ -197,11 +200,16 @@ var Airstate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
-    console.log("game state:" + gameState+ "\n" + "gamePreviousState" + gamePreviousState);
-
+    //console.log("game state:" + gameState+ "\n" + "gamePreviousState" + gamePreviousState);
+    //console.log("timer :"+timer.seconds);
     if (swipe == 1)
         LaunchSwipe();
     else {
@@ -437,10 +445,16 @@ var Waterstate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
 
+     //console.log("timer :"+timer.seconds);
     if (swipe == 1)
         LaunchSwipe();
     else {
@@ -675,6 +689,11 @@ var Earthstate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
@@ -913,6 +932,11 @@ var Firestate = {
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
+    if (timer == -1)
+    {
+        timer = game.time.create(false);
+        timer.start();
+    }
   },
 
   update: function () {
@@ -1171,6 +1195,11 @@ function create() {
   }
   game.input.onTap.add(onTap, this);
   player_diamond = 0;
+  if (timer == -1)
+  {
+      timer = game.time.create(false);
+      timer.start();
+  }
 }
 
 
