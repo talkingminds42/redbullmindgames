@@ -401,6 +401,7 @@ function drawMap() {
     for (var y = 0; y < Line; y++)
       for (var x = 0; x < Column; x++){
         if (map[y][x] == 0){
+
             groupblock.create(((x * 50) +  M_left), ((y * 50) + M_top), 'hole').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 1 || map[y][x] == 2){
@@ -410,7 +411,10 @@ function drawMap() {
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_red').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 4){
-            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'bomb').scale.setTo(0.5, 0.5);
+            bomb = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'bomb');
+            bomb.scale.setTo(0.5, 0.5);
+            var lighting = bomb.animations.add('animation');
+            bomb.animations.play('animation', 6, true);
         }
         else if (map[y][x] == 5){
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'key').scale.setTo(0.5, 0.5);
@@ -422,7 +426,10 @@ function drawMap() {
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'light').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 8){
-            groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse').scale.setTo(0.5, 0.5);
+            tornado = groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse');
+            tornado.scale.setTo(0.5, 0.5);
+            var tor = tornado.animations.add('animation');
+            tornado.animations.play('animation', 6, true);
         }
         else if (map[y][x] == 9){
             groupblock.create(((x * 50) + M_left), ((y * 50) + M_top), 'umbrella').scale.setTo(0.5, 0.5);

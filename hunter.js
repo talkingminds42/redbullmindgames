@@ -99,9 +99,10 @@ function ClickEvent()
 function preload() {
   game.load.image('tile', 'assets/bloc_empty.png');
   game.load.image('hole', 'assets/bloc_black.png');
-  game.load.image('bomb', 'assets/bloc_bomb.png');
+  game.load.spritesheet('bomb', 'assets/lightning.png', 100, 100, 4);
+  game.load.image('lightning_light', 'assets/lightning_light.png');
   game.load.image('diamond_red', 'assets/bloc_diamond_red.png');
-  game.load.image('jager', 'assets/jager.png');
+  game.load.spritesheet('jager', 'assets/Hera.png', 100, 100, 11);
   game.load.image('lock', 'assets/bloc_locker.png');
   game.load.image('key', 'assets/bloc_key.png');
   game.load.image('button_key', 'assets/button_key.png');
@@ -110,7 +111,7 @@ function preload() {
   game.load.image('titre', 'assets/jagerhunter.png');
   game.load.image('background', 'assets/background.png');
   game.load.image('light', 'assets/bloc_light.png');
-  game.load.image('reverse', 'assets/bloc_reverse.png');
+  game.load.spritesheet('reverse', 'assets/bloc_reverse.png', 100, 100, 4);
   game.load.image('umbrella', 'assets/bloc_umbrella.png');
   game.load.image('fast', 'assets/bloc_fast.png');
   game.load.image('slow', 'assets/bloc_slow.png');
@@ -155,6 +156,7 @@ function create() {
   {
       swipe = 1;
   }, this);
+  game.stage.backgroundColor = "#b6d2f4";
   trap = 0;
   copyMap();
   groupblock = game.add.group();
@@ -171,6 +173,8 @@ function create() {
     hideMap();
   jager = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'jager');
   jager.scale.setTo(0.5, 0.5);
+  var animation = jager.animations.add('animation');
+  jager.animations.play('animation', 10, true);
   if (createinit == 0)
   {
     createinit = 1;
@@ -181,7 +185,7 @@ function create() {
     score = 0;
     scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
     enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-    title = block0_0 = game.add.image(400, 0, 'titre');
+  //  title = block0_0 = game.add.image(400, 0, 'titre');
     background = game.add.image(M_left + 100, M_top + 610, 'background');
     arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
     game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
@@ -274,7 +278,8 @@ function showlight() {
             grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_red').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 4){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'bomb').scale.setTo(0.5, 0.5);
+            bombs = grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'lightning_light');
+            bombs.scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 5){
             grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'key').scale.setTo(0.5, 0.5);
@@ -300,7 +305,7 @@ function showlight() {
         else if (map[y][x] == 12){
             grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'break').scale.setTo(0.5, 0.5);
         }
-		else if (map[y][x] == 13){
+		    else if (map[y][x] == 13){
             grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_blue').scale.setTo(0.5, 0.5);
         }
         else if (map[y][x] == 14){
@@ -367,16 +372,77 @@ function update() {
 if (swipe == 1)
     LaunchSwipe();
 else {
-    if (tutorial < 6){
-      if (((enterK.isDown || isTap) && onepress == 1)){
-              updateTutorial();
-              onepress=2;
-              isTap = 2;
-          }
-      if (enterK.isUp || isTap == 2) {
-              onepress = 1;
-              isTap = 0;
-          }
+  if (tutorial < 6){
+    if ((enterK.isDown || isTap) && onepress == 1){
+			updateTutorial();
+			onepress=2;
+            isTap = 2;
+		}
+    if (enterK.isUp || isTap == 2) {
+			onepress = 1;
+            isTap = 0;
+		}
+  }
+  else if (tutorial > 6 && (tutorial % 2) == 1)
+    updateTutorial();
+else if (enterK.isDown && onepress == 1){
+	cheat++;
+}
+else if (cheat > 20){
+	cheat = 0;
+	victory();
+	onpress = 1;
+}
+  else if (losing == 0){
+    dir.x = 0;
+    dir.y = 0;
+
+    if (reverse == 0) {
+        if (this.cursors.left.isDown && onepress == 1){
+            dir.x = -1;
+            move(dir);
+            onepress = 3;
+        }
+        if (this.cursors.right.isDown && onepress == 1){
+            dir.x = 1;
+            move(dir);
+            onepress = 4;
+        }
+        if (this.cursors.up.isDown && onepress == 1){
+            dir.y = -1;
+            move(dir);
+            onepress = 5;
+        }
+        if (this.cursors.down.isDown && onepress == 1){
+            dir.y = 1;
+            move(dir);
+            onepress = 2;
+        }
+    }
+    else {
+        if (this.cursors.right.isDown && onepress == 1){
+            dir.x = -1;
+            move(dir);
+            onepress = 3;
+        }
+        if (this.cursors.left.isDown && onepress == 1){
+            dir.x = 1;
+            move(dir);
+            onepress = 4;
+        }
+        if (this.cursors.down.isDown && onepress == 1){
+            dir.y = -1;
+            move(dir);
+            onepress = 5;
+        }
+        if (this.cursors.up.isDown && onepress == 1){
+            dir.y = 1;
+            move(dir);
+            onepress = 2;
+        }
+    }
+    if (onepress == 2 && this.cursors.down.isUp) {
+      onepress = 1;
     }
     else if (tutorial > 6 && (tutorial % 2) == 1)
       updateTutorial();
@@ -451,7 +517,7 @@ else {
         onepress = 1;
       }
     }
-
+}
 }
 
 }
