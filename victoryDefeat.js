@@ -25,12 +25,12 @@ function defeat(){
       losing = 1;
       map[player.y][player.x] = 1;
       umbrellaButton.kill();
-      var Tweenbomb = game.add.tween(bombitem).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
-      Tweenbomb.onComplete.addOnce(function(){
+      var Tweenstorm = game.add.tween(stormitem).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
+      Tweenstorm.onComplete.addOnce(function(){
         grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
         losing = 0;
       });
-      Tweenbomb.start();
+      Tweenstorm.start();
     }
     else {
       losing = 5;
