@@ -76,6 +76,8 @@ function playerclear()
   else if (yep == 4){
       bombitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'bomb');
       bombitem.scale.setTo(0.5, 0.5);
+      var lighting = bombitem.animations.add('animation');
+      bombitem.animations.play('animation', 6, true);
   }
   else if (yep == 5){
       keyitem = grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'key');
