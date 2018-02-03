@@ -99,7 +99,8 @@ var bootstate = {
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
-    button = game.add.button(game.world.centerX - 95, 400, 'playbutton', actionOnClick, this);
+    Airbutton = game.add.button(game.world.centerX - 96, 400, 'playbutton', AirOnClick, this);
+    Waterbutton = game.add.button(game.world.centerX - 96, 200, 'playbutton', WaterOnClick, this);
       console.log('bootstate created');
   },
 
@@ -424,14 +425,13 @@ var Waterstate = {
       game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
       credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
       text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-      console.log('Test');
+
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
   },
 
   update: function () {
-    console.log("game state:" + gameState+ "\n" + "gamePreviousState" + gamePreviousState);
 
     if (swipe == 1)
         LaunchSwipe();
@@ -596,9 +596,12 @@ game.state.add('Airstate', Airstate);
 game.state.add('Waterstate', Waterstate);
 
 game.state.start('bootstate');
-function actionOnClick(){
-   // game.state.start('Airstate');
-   game.state.start('Waterstate');
+function AirOnClick(button){
+    game.state.start('Airstate');
+}
+
+function WaterOnClick(button){
+    game.state.start('Waterstate');
 }
 
 function ClickEvent()
