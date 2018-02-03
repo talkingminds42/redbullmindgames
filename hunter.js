@@ -187,7 +187,6 @@ var Airstate = {
       tutorial = 1;
       this.cursors = game.input.keyboard.createCursorKeys();
       onepress = 1;
-      creditsbool = 0;
       score = 0;
       scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
       enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
