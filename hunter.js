@@ -88,6 +88,14 @@ var about;
 var player_diamond;
 var diamond;
 
+var click = 0;
+
+function ClickEvent()
+{
+    console.log("click event");
+    click = 1;
+}
+
 function preload() {
   game.load.image('tile', 'assets/bloc_empty.png');
   game.load.image('hole', 'assets/bloc_black.png');
@@ -132,7 +140,21 @@ function preload() {
   game.load.image('order', 'assets/order.png');
 }
 
+var mc;
+
+var swipe = 0;
+
 function create() {
+  document.getElementById("body").addEventListener("click", ClickEvent);
+  game.input.addPointer();
+  game.input.onUp.add(function ()
+  {
+      swipe = 0;
+  }, this);
+  game.input.onDown.add(function ()
+  {
+      swipe = 1;
+  }, this);
   trap = 0;
   copyMap();
   groupblock = game.add.group();
@@ -166,7 +188,15 @@ function create() {
     credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
     text = game.add.text(M_left + 115, M_top + 625, "Hello Jager Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
   }
+  game.input.onTap.add(onTap, this);
   player_diamond = 0;
+}
+
+var isTap = 0;
+function onTap()
+{
+    //alert("tap");
+    isTap = 1;
 }
 
 // copy la map du niveau dans le tableau de map actuel
@@ -326,95 +356,104 @@ function checkDiamond(yep){
     }
 }
 
-// check si mouvement possible
-function canGo(dir) {
-  if ((player.x + dir.x) < 0 || (player.y + dir.y) < 0 || (player.x + dir.x) >= 16 || (player.y + dir.y) >= 12 || map[player.y + dir.y][player.x + dir.x] == 0 || (map[player.y + dir.y][player.x + dir.x] == 6 && key == 0))
-    return(1);
-  else
-    return(0);
-}
+
+var b_pos_mouse = 0;
+var start_mouse_x = 0;
+var start_mouse_y = 0;
+
 
 function update() {
-  if (tutorial < 6){
-    if (enterK.isDown && onepress == 1){
-			updateTutorial();
-			onepress=2;
-		}
-    if (enterK.isUp) {
-			onepress = 1;
-		}
-  }
-  else if (tutorial > 6 && (tutorial % 2) == 1)
-    updateTutorial();
-else if (enterK.isDown && onepress == 1){
-	cheat++;
-}
-else if (cheat > 420){
-	cheat = 0;
-	victory();
-	onpress = 1;
-}
-  else if (losing == 0){
-    dir.x = 0;
-    dir.y = 0;
 
-    if (reverse == 0) {
-        if (this.cursors.left.isDown && onepress == 1){
-            dir.x = -1;
-            move(dir);
-            onepress = 3;
-        }
-        if (this.cursors.right.isDown && onepress == 1){
-            dir.x = 1;
-            move(dir);
-            onepress = 4;
-        }
-        if (this.cursors.up.isDown && onepress == 1){
-            dir.y = -1;
-            move(dir);
-            onepress = 5;
-        }
-        if (this.cursors.down.isDown && onepress == 1){
-            dir.y = 1;
-            move(dir);
-            onepress = 2;
-        }
+if (swipe == 1)
+    LaunchSwipe();
+else {
+    if (tutorial < 6){
+      if (((enterK.isDown || isTap) && onepress == 1)){
+              updateTutorial();
+              onepress=2;
+              isTap = 2;
+          }
+      if (enterK.isUp || isTap == 2) {
+              onepress = 1;
+              isTap = 0;
+          }
     }
-    else {
-        if (this.cursors.right.isDown && onepress == 1){
-            dir.x = -1;
-            move(dir);
-            onepress = 3;
-        }
-        if (this.cursors.left.isDown && onepress == 1){
-            dir.x = 1;
-            move(dir);
-            onepress = 4;
-        }
-        if (this.cursors.down.isDown && onepress == 1){
-            dir.y = -1;
-            move(dir);
-            onepress = 5;
-        }
-        if (this.cursors.up.isDown && onepress == 1){
-            dir.y = 1;
-            move(dir);
-            onepress = 2;
-        }
+    else if (tutorial > 6 && (tutorial % 2) == 1)
+      updateTutorial();
+    else if (enterK.isDown && onepress == 1){
+      cheat++;
     }
-    if (onepress == 2 && this.cursors.down.isUp) {
-      onepress = 1;
+    else if (cheat > 420){
+      cheat = 0;
+      victory();
+      onpress = 1;
     }
-    if (onepress == 3 && this.cursors.left.isUp) {
-      onepress = 1;
+    if (losing == 0){
+      dir.x = 0;
+      dir.y = 0;
+
+      if (reverse == 0) {
+          if (swipe == 0)
+              EndSwipe();
+          if (this.cursors.left.isDown && onepress == 1){
+              dir.x = -1;
+              move(dir);
+              onepress = 3;
+          }
+          if (this.cursors.right.isDown && onepress == 1){
+              dir.x = 1;
+              move(dir);
+              onepress = 4;
+          }
+          if (this.cursors.up.isDown && onepress == 1){
+              dir.y = -1;
+              move(dir);
+              onepress = 5;
+          }
+          if (this.cursors.down.isDown && onepress == 1){
+              dir.y = 1;
+              move(dir);
+              onepress = 2;
+          }
+      }
+      else {
+          if (this.cursors.right.isDown && onepress == 1){
+              dir.x = -1;
+              move(dir);
+              onepress = 3;
+          }
+          if (this.cursors.left.isDown && onepress == 1){
+              dir.x = 1;
+              move(dir);
+              onepress = 4;
+          }
+          if (this.cursors.down.isDown && onepress == 1){
+              dir.y = -1;
+              move(dir);
+              onepress = 5;
+          }
+          if (this.cursors.up.isDown && onepress == 1){
+              dir.y = 1;
+              move(dir);
+              onepress = 2;
+          }
+      }
+      if (onepress == 2 && this.cursors.down.isUp) {
+        onepress = 1;
+      }
+      if (onepress == 3 && this.cursors.left.isUp) {
+        onepress = 1;
+      }
+      if (onepress == 4 && this.cursors.right.isUp) {
+        onepress = 1;
+      }
+      if (onepress == 5 && this.cursors.up.isUp) {
+        onepress = 1;
+      }
     }
-    if (onepress == 4 && this.cursors.right.isUp) {
-      onepress = 1;
-    }
-    if (onepress == 5 && this.cursors.up.isUp) {
-      onepress = 1;
-    }
-  }
+
+}
+
 }
 
 
