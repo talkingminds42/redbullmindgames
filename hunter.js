@@ -839,25 +839,25 @@ var Earthstate = {
 var Firestate = {
 
   preload: function () {
-    game.load.image('tile', 'assets/Water/ice.png');
-    game.load.image('hole', 'assets/Water/bloc_black.png');
-      game.load.spritesheet('storm', 'assets/Water/lightning.png', 100, 100, 4);
-    game.load.image('lightning_light', 'assets/Water/lightning_light.png');
-    game.load.image('stone', 'assets/Water/AirTab.png');
+    game.load.image('tile', 'assets/Fire/lava.png');
+    game.load.image('hole', 'assets/Fire/bloc_black.png');
+      game.load.spritesheet('storm', 'assets/Fire/lightning.png', 100, 100, 4);
+    game.load.image('lightning_light', 'assets/Fire/lightning_light.png');
+    game.load.image('stone', 'assets/Fire/WaterTab.png');
     game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);
-    game.load.image('lock', 'assets/Water/bloc_locker.png');
-    game.load.image('key', 'assets/Water/bloc_key.png');
+    game.load.image('lock', 'assets/Fire/bloc_locker.png');
+    game.load.image('key', 'assets/Fire/bloc_key.png');
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
-    game.load.image('hide', 'assets/Water/bloc_hidden.png');
+    game.load.image('hide', 'assets/Fire/bloc_hidden.png');
     game.load.image('titre', 'assets/jagerhunter.png');
-    game.load.spritesheet('reverse', 'assets/Water/bloc_reverse.png', 100, 100, 4);
-    game.load.image('umbrella', 'assets/Water/bloc_umbrella.png');
-    game.load.image('sun', 'assets/Water/bloc_light.png');
+    game.load.spritesheet('reverse', 'assets/Fire/bloc_reverse.png', 100, 100, 4);
+    game.load.image('umbrella', 'assets/Fire/bloc_umbrella.png');
+    game.load.image('sun', 'assets/Fire/bloc_light.png');
     game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
     game.load.image('background', 'assets/background.png');
-    game.load.image('d_red', 'assets/Water/AirTab.png');
+    game.load.image('d_red', 'assets/Fire/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
   },
@@ -874,7 +874,7 @@ var Firestate = {
     {
         swipe = 1;
     }, this);
-    game.stage.backgroundColor = "#4057a2";
+    game.stage.backgroundColor = "#cb6048";
     trap = 0;
     copyMap();
     groupblock = game.add.group();
