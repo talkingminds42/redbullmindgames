@@ -1,3 +1,4 @@
+var gameState = 0;
 // Tile size
 var T_size = 50;
 
@@ -131,46 +132,54 @@ function preload() {
   game.load.image('d_wrong', 'assets/diamond_wrong.png');
   game.load.image('about', 'assets/aboutus.png');
   game.load.image('order', 'assets/order.png');
+  game.load.image('playbutton', 'assets/platbutton.jpeg');
 }
 
 function create() {
   game.stage.backgroundColor = "#b6d2f4";
-  trap = 0;
-  copyMap();
-  groupblock = game.add.group();
-  grouphidden=game.add.group();
-  grouplight=game.add.group();
-  groupgamer=game.add.group();
-  groupdiamonds=game.add.group();
-  groupoverdiamond=game.add.group();
-  losing = 0;
-  cheat = 0;
-  if (hide == 0)
-    drawMap();
-  else
-    hideMap();
-  jager = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'jager');
-  jager.scale.setTo(0.5, 0.5);
-  var animation = jager.animations.add('animation');
-  jager.animations.play('animation', 10, true);
-  if (createinit == 0)
+  if (gameState == 0)
   {
-    createinit = 1;
-    tutorial = 1;
-    this.cursors = game.input.keyboard.createCursorKeys();
-    onepress = 1;
-    creditsbool = 0;
-    score = 0;
-    scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-    enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-  //  title = block0_0 = game.add.image(400, 0, 'titre');
-    background = game.add.image(M_left + 100, M_top + 610, 'background');
-    arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
-    game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-    credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-    text = game.add.text(M_left + 115, M_top + 625, "Hello Jager Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
+    button = game.add.button(game.world.centerX - 95, 400, 'playbutton', PlayOnClick(), this, 2, 1, 0);
   }
-  player_diamond = 0;
+  else if (gameState == 1)
+  {
+    trap = 0;
+    copyMap();
+    groupblock = game.add.group();
+    grouphidden=game.add.group();
+    grouplight=game.add.group();
+    groupgamer=game.add.group();
+    groupdiamonds=game.add.group();
+    groupoverdiamond=game.add.group();
+    losing = 0;
+    cheat = 0;
+    if (hide == 0)
+      drawMap();
+    else
+      hideMap();
+    jager = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'jager');
+    jager.scale.setTo(0.5, 0.5);
+    var animation = jager.animations.add('animation');
+    jager.animations.play('animation', 10, true);
+    if (createinit == 0)
+    {
+      createinit = 1;
+      tutorial = 1;
+      this.cursors = game.input.keyboard.createCursorKeys();
+      onepress = 1;
+      creditsbool = 0;
+      score = 0;
+      scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
+      enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+      //  title = block0_0 = game.add.image(400, 0, 'titre');
+      background = game.add.image(M_left + 100, M_top + 610, 'background');
+      arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
+      game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
+      credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
+      text = game.add.text(M_left + 115, M_top + 625, "Hello Jager Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
+    }
+    player_diamond = 0;
+  }
 }
 
 // copy la map du niveau dans le tableau de map actuel
@@ -181,120 +190,6 @@ function copyMap() {
       }
     }
 }
-
-function victory(){
-    losing = 5;
-    var victory = game.add.text(game.world.centerX, game.world.centerY - 500, 'Victory!', { fill : '#2e2', align: "center" } );
-    victory.anchor.setTo(0.5,0.5);
-    var Tweenvictory = game.add.tween(victory).to({x:game.world.centerX,y:game.world.centerY + 10},1000);
-    Tweenvictory.onComplete.addOnce(function(){
-      if (level < levelmax) {
-        hide = 0;
-        resetButton();
-        level++;
-        tutorial++;
-        destroying();
-        score += 100;
-       scoreText.text = 'Score: ' + score;
-        create();
-      }
-    });
-    Tweenvictory.start();
-}
-
-function defeat(){
-    if (umbrella == 1)
-    {
-      umbrella = 0;
-      losing = 1;
-      map[player.y][player.x] = 1;
-      umbrellaButton.kill();
-      var Tweenbomb = game.add.tween(bombitem).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
-      Tweenbomb.onComplete.addOnce(function(){
-        grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
-        losing = 0;
-      });
-      Tweenbomb.start();
-    }
-    else {
-      losing = 5;
-      resetButton();
-      var gameOver = game.add.text(game.world.centerX, game.world.centerY - 500, 'Game Over!', { fill : '#e22', align: "center" } );
-      gameOver.anchor.setTo(0.5,0.5);
-      var Tweendefeat = game.add.tween(gameOver).to({x:game.world.centerX,y:game.world.centerY + 10},1000);
-      Tweendefeat.onComplete.addOnce(function(){
-        hide = 0;
-        destroying();
-        score -= 20;
-        scoreText.text = 'Score: ' + score;
-        create();
-      });
-      Tweendefeat.start();
-    }
-}
-
-
-// eclaire toute la map
-function showlight() {
-    for (var y = 0; y < Line; y++)
-      for (var x = 0; x < Column; x++){
-        if (map[y][x] == 0){
-            grouplight.create(((x * 50) +  M_left), ((y * 50) + M_top), 'hole').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 1 || map[y][x] == 2){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 3){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_red').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 4){
-            bombs = grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'lightning_light');
-            bombs.scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 5){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'key').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 6){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'lock').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 7){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'light').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 8){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'reverse').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 9){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'umbrella').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 10){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'fast').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 11){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'slow').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 12){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'break').scale.setTo(0.5, 0.5);
-        }
-		    else if (map[y][x] == 13){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_blue').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 14){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_green').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 15){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_orange').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 16){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_yellow').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 17){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_white').scale.setTo(0.5, 0.5);
-        }
-        else if (map[y][x] == 18){
-            grouplight.create(((x * 50) + M_left), ((y * 50) + M_top), 'diamond_violet').scale.setTo(0.5, 0.5);
-        }
-      }
-    }
 
 function resetButton(){
   if(reverse == 1){
@@ -319,27 +214,12 @@ function destroying(){
   groupoverdiamond.removeAll();
 }
 
-function checkDiamond(yep){
-    if (yep == tab_diamond[level][player_diamond + 1]){
-        print_check_diamond();
-        player_diamond++;
-        return(0);
-    }
-    else {
-        print_wrong_diamond();
-        defeat();
-    }
-}
-
-// check si mouvement possible
-function canGo(dir) {
-  if ((player.x + dir.x) < 0 || (player.y + dir.y) < 0 || (player.x + dir.x) >= 16 || (player.y + dir.y) >= 12 || map[player.y + dir.y][player.x + dir.x] == 0 || (map[player.y + dir.y][player.x + dir.x] == 6 && key == 0))
-    return(1);
-  else
-    return(0);
-}
 
 function update() {
+  if (gameState == 0) {
+
+  }
+  else if (gameState == 1) {
   if (tutorial < 6){
     if (enterK.isDown && onepress == 1){
 			updateTutorial();
@@ -420,6 +300,7 @@ else if (cheat > 20){
       onepress = 1;
     }
   }
+}
 }
 
 
