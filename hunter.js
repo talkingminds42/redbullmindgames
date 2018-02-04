@@ -429,7 +429,7 @@ function create() {
   groupoverdiamond=game.add.group();
   losing = 0;
   cheat = 0;
-
+/*
   if (createinit == 0)
   {
     createinit = 1;
@@ -447,7 +447,7 @@ function create() {
     credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
     text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
     console.log('Test');
-  }
+}*/
   if (hide == 0)
     drawMap();
   else
