@@ -14,6 +14,22 @@ function victory(){
         scoreText.text = 'Score: ' + score;
         console.log(tab_score);
         level++;
+        if (level == 8)
+        {
+          if (!(planetState & 0x04))
+            planetState += 4;
+          game.state.start('bootstate');
+        }
+        else if(level == 16) {
+          if (!(planetState & 0x01))
+            planetState += 1;
+          game.state.start('bootstate');
+        }
+        else if(level == 24) {
+          if (!(planetState & 0x02))
+            planetState += 2;
+          game.state.start('bootstate');
+        }
         tutorial++;
         destroying();
        timer.destroy();

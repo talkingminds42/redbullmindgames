@@ -93,7 +93,7 @@ var diamond;
 
 var click = 0;
 
-
+var planetState = 0;
 
 // initialise Phaser
 var game = new Phaser.Game(1200, 800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
@@ -118,6 +118,10 @@ var bootstate = {
     game.load.image('lvl6', 'assets/lvl6.png');
     game.load.image('lvl7', 'assets/lvl7.png');
     game.load.image('lvl8', 'assets/lvl8.png');
+    game.load.image('clouds', 'assets/clouds.png');
+    game.load.image('planet', 'assets/planet.png');
+    game.load.image('water', 'assets/water.png');
+    game.load.image('volcano', 'assets/volcano.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
@@ -126,6 +130,32 @@ var bootstate = {
     Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
     creditbutton = game.add.button(1050, 20, 'creditsbutton', creditsclick, this);
       //console.log('bootstate created');
+    planet =  game.add.image(M_left + 130, M_top, 'planet');
+    if ((planetState & 0x01))
+    {
+      water_planet =  game.add.image(M_left + 130, M_top, 'water');
+    }
+    if ((planetState & 0x02))
+    {
+      volcano =  game.add.image(M_left + 130, M_top, 'volcano');
+    }
+    if ((planetState & 0x04))
+    {
+      clouds =  game.add.image(M_left + 130, M_top, 'clouds');
+    }
+    // else if(planetState == 1) {
+    //   planet =  game.add.image(M_left + 130, M_top, 'planet');
+    //   clouds =  game.add.image(M_left + 130, M_top, 'clouds');
+    // }
+    // else if (planetState == 2) {
+    //   water_planet =  game.add.image(M_left + 130, M_top, 'water');
+    //   clouds =  game.add.image(M_left + 130, M_top, 'clouds');
+    // }
+    // else if (planetState == 3) {
+    //   water_planet =  game.add.image(M_left + 130, M_top, 'water');
+    //   volcano =  game.add.image(M_left + 130, M_top, 'volcano');
+    //   clouds =  game.add.image(M_left + 130, M_top, 'clouds');
+    // }
   },
 
   update: function () {
@@ -207,6 +237,8 @@ var Waterstate = {
     game.load.image('d_red', 'assets/Water/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
 
     game.load.image('b_up_left', 'assets/background_ui_up_left.png');
     game.load.image('help', 'assets/help.png');
@@ -249,6 +281,8 @@ var Earthstate = {
     game.load.image('d_red', 'assets/Earth/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
 
     game.load.image('b_up_left', 'assets/background_ui_up_left.png');
     game.load.image('help', 'assets/help.png');
@@ -299,6 +333,8 @@ var Firestate = {
     game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
     game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
     game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
 
     game.load.image('b_up_left', 'assets/background_ui_up_left.png');
     game.load.image('help', 'assets/help.png');
@@ -337,7 +373,6 @@ var mc;
 var swipe = 0;
 
 function create() {
-  console.log("yolyo");
   document.getElementById("body").addEventListener("click", ClickEvent);
   game.input.addPointer();
   game.input.onUp.add(function ()
