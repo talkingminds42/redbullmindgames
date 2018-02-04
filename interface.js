@@ -1,7 +1,30 @@
 
 function createInterface()
 {
-    
+
+}
+
+function menuButton()
+{
+    game.state.start('bootstate');
+    createinit = 0;
+}
+
+function retryButton()
+{
+    defeat();
+}
+
+function helpButton()
+{
+    if (helpbool == 0){
+        helpbool = 1;
+        help =  game.add.image(M_left + 150, M_top + 60, 'help');
+    }
+    else {
+      helpbool = 0;
+      help.kill();
+    }
 }
 
 // fonction pour faire apparaitre le about (en haut a droit)

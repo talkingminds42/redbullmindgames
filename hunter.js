@@ -135,240 +135,37 @@ var Airstate = {
     game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);
     game.load.image('lock', 'assets/Air/bloc_locker.png');
     game.load.image('key', 'assets/Air/bloc_key.png');
-    game.load.image('button_key', 'assets/button_key.png');
-    game.load.image('button_umbrella', 'assets/button_umbrella.png');
-    game.load.image('button_reverse', 'assets/button_reverse.png');
     game.load.image('hide', 'assets/Air/bloc_hidden.png');
-    game.load.image('titre', 'assets/jagerhunter.png');
+    //game.load.image('titre', 'assets/jagerhunter.png');
     game.load.spritesheet('reverse', 'assets/Air/bloc_reverse.png', 100, 100, 4);
     game.load.image('umbrella', 'assets/Air/bloc_umbrella.png');
     game.load.image('sun', 'assets/Air/bloc_light.png');
     game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
+
     //game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
-    game.load.image('background', 'assets/background.png');
+    //game.load.image('background', 'assets/background.png');
     game.load.image('d_red', 'assets/Air/AirTab.png');
-    game.load.image('arrow', 'assets/arrowred.png');
-    game.load.image('order', 'assets/order.png');
+    //game.load.image('arrow', 'assets/arrowred.png');
+    game.load.image('order', 'assets/order.png')
+
+    game.load.image('b_up_left', 'assets/background_ui_up_left.png');
+    game.load.image('help', 'assets/help.png');
+    game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('button_umbrella', 'assets/button_umbrella.png');
+    game.load.image('button_reverse', 'assets/button_reverse.png');
   },
 
   create: function () {
-    gameState = 1;
-    console.log('CREATE SHEET');
-    document.getElementById("body").addEventListener("click", ClickEvent);
-    game.input.addPointer();
-    game.input.onUp.add(function ()
-    {
-        swipe = 0;
-    }, this);
-    game.input.onDown.add(function ()
-    {
-        swipe = 1;
-    }, this);
-    game.stage.backgroundColor = "#b6d2f4";
-    trap = 0;
-    copyMap();
-    groupblock = game.add.group();
-    grouphidden=game.add.group();
-    groupsun=game.add.group();
-    groupgamer=game.add.group();
-    groupdiamonds=game.add.group();
-    groupoverdiamond=game.add.group();
-    losing = 0;
-    cheat = 0;
-    if (hide == 0)
-      drawMap();
-    else
-      hideMap();
-    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
-    hera.scale.setTo(0.5, 0.5);
-    var animation = hera.animations.add('animation');
-    hera.animations.play('animation', 10, true);
-    if (createinit == 0)
-    {
-      createinit = 1;
-      tutorial = 1;
-      this.cursors = game.input.keyboard.createCursorKeys();
-      onepress = 1;
-      score = 0;
-      scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-      enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      title = block0_0 = game.add.image(400, 0, 'titre');
-      background = game.add.image(M_left + 100, M_top + 610, 'background');
-      arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
-      game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-      //credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-      items = game.add.button(M_left + 850,  10, 'items', creditsclick, this).scale.setTo(1,1);
-      text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-      //console.log('Test');
-    }
-    game.input.onTap.add(onTap, this);
-    player_diamond = 0;
-    if (timer == -1)
-    {
-        timer = game.time.create(false);
-        timer.start();
-    }
+     gameState = 1;
+     game.stage.backgroundColor = "#b6d2f4";
+    create_state_level();
   },
 
   update: function () {
-    //console.log("game state:" + gameState+ "\n" + "gamePreviousState" + gamePreviousState);
-    //console.log("timer :"+timer.seconds);
-    if (swipe == 1)
-        LaunchSwipe();
-    else {
-      if (tutorial < 6){
-        if ((enterK.isDown || isTap) && onepress == 1){
-    			updateTutorial();
-    			onepress=2;
-                isTap = 2;
-    		}
-        if (enterK.isUp || isTap == 2) {
-    			onepress = 1;
-                isTap = 0;
-    		}
-      }
-      else if (tutorial > 6 && (tutorial % 2) == 1)
-        updateTutorial();
-    else if (enterK.isDown && onepress == 1){
-    	cheat++;
-    }
-    else if (cheat > 20){
-    	cheat = 0;
-    	victory();
-    	onpress = 1;
-    }
-      else if (losing == 0){
-        dir.x = 0;
-        dir.y = 0;
-
-        if (reverse == 0) {
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        else {
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        if (onepress == 2 && this.cursors.down.isUp) {
-          onepress = 1;
-        }
-        else if (tutorial > 6 && (tutorial % 2) == 1)
-          updateTutorial();
-        else if (enterK.isDown && onepress == 1){
-          cheat++;
-        }
-        else if (cheat > 420){
-          cheat = 0;
-          victory();
-          onpress = 1;
-        }
-        if (losing == 0){
-          dir.x = 0;
-          dir.y = 0;
-
-          if (reverse == 0) {
-              if (swipe == 0)
-                  EndSwipe(reverse);
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          else {
-              if (swipe == 0)
-                EndSwipe(reverse);
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          if (onepress == 2 && this.cursors.down.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 3 && this.cursors.left.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 4 && this.cursors.right.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 5 && this.cursors.up.isUp) {
-            onepress = 1;
-          }
-        }
-    }
-
-    }
-
-  }
+    update_state_level();
+}
 };
 
 var Waterstate = {
@@ -396,223 +193,22 @@ var Waterstate = {
     game.load.image('d_red', 'assets/Water/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+
+    game.load.image('b_up_left', 'assets/background_ui_up_left.png');
+    game.load.image('help', 'assets/help.png');
+    game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('button_umbrella', 'assets/button_umbrella.png');
+    game.load.image('button_reverse', 'assets/button_reverse.png');
   },
 
   create: function () {
     gameState = 2;
-    document.getElementById("body").addEventListener("click", ClickEvent);
-    game.input.addPointer();
-    game.input.onUp.add(function ()
-    {
-        swipe = 0;
-    }, this);
-    game.input.onDown.add(function ()
-    {
-        swipe = 1;
-    }, this);
     game.stage.backgroundColor = "#4057a2";
-    trap = 0;
-    copyMap();
-    groupblock = game.add.group();
-    grouphidden=game.add.group();
-    groupsun=game.add.group();
-    groupgamer=game.add.group();
-    groupdiamonds=game.add.group();
-    groupoverdiamond=game.add.group();
-    losing = 0;
-    cheat = 0;
-    if (hide == 0)
-      drawMap();
-    else
-      hideMap();
-    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
-    hera.scale.setTo(0.5, 0.5);
-    var animation = hera.animations.add('animation');
-    hera.animations.play('animation', 10, true);
-    if (createinit == 0)
-    {
-      createinit = 1;
-      tutorial = 1;
-      this.cursors = game.input.keyboard.createCursorKeys();
-      onepress = 1;
-      creditsbool = 0;
-      score = 0;
-      scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-      enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      //  title = block0_0 = game.add.image(400, 0, 'titre');
-      background = game.add.image(M_left + 100, M_top + 610, 'background');
-      arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
-      game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-      credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-      text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-
-    }
-    game.input.onTap.add(onTap, this);
-    player_diamond = 0;
-    if (timer == -1)
-    {
-        timer = game.time.create(false);
-        timer.start();
-    }
+    create_state_level();
   },
 
   update: function () {
-
-     //console.log("timer :"+timer.seconds);
-    if (swipe == 1)
-        LaunchSwipe();
-    else {
-      if (tutorial < 6){
-        if ((enterK.isDown || isTap) && onepress == 1){
-    			updateTutorial();
-    			onepress=2;
-                isTap = 2;
-    		}
-        if (enterK.isUp || isTap == 2) {
-    			onepress = 1;
-                isTap = 0;
-    		}
-      }
-      else if (tutorial > 6 && (tutorial % 2) == 1)
-        updateTutorial();
-    else if (enterK.isDown && onepress == 1){
-    	cheat++;
-    }
-    else if (cheat > 20){
-    	cheat = 0;
-    	victory();
-    	onpress = 1;
-    }
-      else if (losing == 0){
-        dir.x = 0;
-        dir.y = 0;
-
-        if (reverse == 0) {
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        else {
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        if (onepress == 2 && this.cursors.down.isUp) {
-          onepress = 1;
-        }
-        else if (tutorial > 6 && (tutorial % 2) == 1)
-          updateTutorial();
-        else if (enterK.isDown && onepress == 1){
-          cheat++;
-        }
-        else if (cheat > 420){
-          cheat = 0;
-          victory();
-          onpress = 1;
-        }
-        if (losing == 0){
-          dir.x = 0;
-          dir.y = 0;
-
-          if (reverse == 0) {
-              if (swipe == 0)
-                  EndSwipe(reverse);
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          else {
-              if (swipe == 0)
-                EndSwipe(reverse);
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          if (onepress == 2 && this.cursors.down.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 3 && this.cursors.left.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 4 && this.cursors.right.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 5 && this.cursors.up.isUp) {
-            onepress = 1;
-          }
-        }
-    }
-
-    }
-
+      update_state_level();
   }
 };
 
@@ -630,7 +226,6 @@ var Earthstate = {
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
     game.load.image('hide', 'assets/Earth/bloc_hidden.png');
-    game.load.image('titre', 'assets/jagerhunter.png');
     game.load.spritesheet('reverse', 'assets/Earth/bloc_reverse.png', 100, 100, 4);
     game.load.image('umbrella', 'assets/Earth/bloc_umbrella.png');
     game.load.image('sun', 'assets/Earth/bloc_light.png');
@@ -640,222 +235,22 @@ var Earthstate = {
     game.load.image('d_red', 'assets/Earth/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+
+    game.load.image('b_up_left', 'assets/background_ui_up_left.png');
+    game.load.image('help', 'assets/help.png');
+    game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('button_umbrella', 'assets/button_umbrella.png');
+    game.load.image('button_reverse', 'assets/button_reverse.png');
   },
 
   create: function () {
     gameState = 2;
-    document.getElementById("body").addEventListener("click", ClickEvent);
-    game.input.addPointer();
-    game.input.onUp.add(function ()
-    {
-        swipe = 0;
-    }, this);
-    game.input.onDown.add(function ()
-    {
-        swipe = 1;
-    }, this);
     game.stage.backgroundColor = "#8cd07a";
-    trap = 0;
-    copyMap();
-    groupblock = game.add.group();
-    grouphidden=game.add.group();
-    groupsun=game.add.group();
-    groupgamer=game.add.group();
-    groupdiamonds=game.add.group();
-    groupoverdiamond=game.add.group();
-    losing = 0;
-    cheat = 0;
-    if (hide == 0)
-      drawMap();
-    else
-      hideMap();
-    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
-    hera.scale.setTo(0.5, 0.5);
-    var animation = hera.animations.add('animation');
-    hera.animations.play('animation', 10, true);
-    if (createinit == 0)
-    {
-      createinit = 1;
-      tutorial = 1;
-      this.cursors = game.input.keyboard.createCursorKeys();
-      onepress = 1;
-      creditsbool = 0;
-      score = 0;
-      scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-      enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      //  title = block0_0 = game.add.image(400, 0, 'titre');
-      background = game.add.image(M_left + 100, M_top + 610, 'background');
-      arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
-      game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-      credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-      text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-
-    }
-    game.input.onTap.add(onTap, this);
-    player_diamond = 0;
-    if (timer == -1)
-    {
-        timer = game.time.create(false);
-        timer.start();
-    }
+    create_state_level();
   },
 
   update: function () {
-
-    if (swipe == 1)
-        LaunchSwipe();
-    else {
-      if (tutorial < 6){
-        if ((enterK.isDown || isTap) && onepress == 1){
-    			updateTutorial();
-    			onepress=2;
-                isTap = 2;
-    		}
-        if (enterK.isUp || isTap == 2) {
-    			onepress = 1;
-                isTap = 0;
-    		}
-      }
-      else if (tutorial > 6 && (tutorial % 2) == 1)
-        updateTutorial();
-    else if (enterK.isDown && onepress == 1){
-    	cheat++;
-    }
-    else if (cheat > 20){
-    	cheat = 0;
-    	victory();
-    	onpress = 1;
-    }
-      else if (losing == 0){
-        dir.x = 0;
-        dir.y = 0;
-
-        if (reverse == 0) {
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        else {
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        if (onepress == 2 && this.cursors.down.isUp) {
-          onepress = 1;
-        }
-        else if (tutorial > 6 && (tutorial % 2) == 1)
-          updateTutorial();
-        else if (enterK.isDown && onepress == 1){
-          cheat++;
-        }
-        else if (cheat > 420){
-          cheat = 0;
-          victory();
-          onpress = 1;
-        }
-        if (losing == 0){
-          dir.x = 0;
-          dir.y = 0;
-
-          if (reverse == 0) {
-              if (swipe == 0)
-                  EndSwipe(reverse);
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          else {
-              if (swipe == 0)
-                EndSwipe(reverse);
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          if (onepress == 2 && this.cursors.down.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 3 && this.cursors.left.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 4 && this.cursors.right.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 5 && this.cursors.up.isUp) {
-            onepress = 1;
-          }
-        }
-    }
-
-    }
-
+      update_state_level();
   }
 };
 
@@ -890,222 +285,22 @@ var Firestate = {
     game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
     game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
     game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
+
+    game.load.image('b_up_left', 'assets/background_ui_up_left.png');
+    game.load.image('help', 'assets/help.png');
+    game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('button_umbrella', 'assets/button_umbrella.png');
+    game.load.image('button_reverse', 'assets/button_reverse.png');
   },
 
   create: function () {
     gameState = 2;
-    document.getElementById("body").addEventListener("click", ClickEvent);
-    game.input.addPointer();
-    game.input.onUp.add(function ()
-    {
-        swipe = 0;
-    }, this);
-    game.input.onDown.add(function ()
-    {
-        swipe = 1;
-    }, this);
     game.stage.backgroundColor = "#cb6048";
-    trap = 0;
-    copyMap();
-    groupblock = game.add.group();
-    grouphidden=game.add.group();
-    groupsun=game.add.group();
-    groupgamer=game.add.group();
-    groupdiamonds=game.add.group();
-    groupoverdiamond=game.add.group();
-    losing = 0;
-    cheat = 0;
-    if (hide == 0)
-      drawMap();
-    else
-      hideMap();
-    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
-    hera.scale.setTo(0.5, 0.5);
-    var animation = hera.animations.add('animation');
-    hera.animations.play('animation', 10, true);
-    if (createinit == 0)
-    {
-      createinit = 1;
-      tutorial = 1;
-      this.cursors = game.input.keyboard.createCursorKeys();
-      onepress = 1;
-      creditsbool = 0;
-      score = 0;
-      scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
-      enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      //  title = block0_0 = game.add.image(400, 0, 'titre');
-      background = game.add.image(M_left + 100, M_top + 610, 'background');
-      arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
-      game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-      credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
-      text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-
-    }
-    game.input.onTap.add(onTap, this);
-    player_diamond = 0;
-    if (timer == -1)
-    {
-        timer = game.time.create(false);
-        timer.start();
-    }
+    create_state_level();
   },
 
   update: function () {
-
-    if (swipe == 1)
-        LaunchSwipe();
-    else {
-      if (tutorial < 6){
-        if ((enterK.isDown || isTap) && onepress == 1){
-    			updateTutorial();
-    			onepress=2;
-                isTap = 2;
-    		}
-        if (enterK.isUp || isTap == 2) {
-    			onepress = 1;
-                isTap = 0;
-    		}
-      }
-      else if (tutorial > 6 && (tutorial % 2) == 1)
-        updateTutorial();
-    else if (enterK.isDown && onepress == 1){
-    	cheat++;
-    }
-    else if (cheat > 20){
-    	cheat = 0;
-    	victory();
-    	onpress = 1;
-    }
-      else if (losing == 0){
-        dir.x = 0;
-        dir.y = 0;
-
-        if (reverse == 0) {
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        else {
-            if (this.cursors.right.isDown && onepress == 1){
-                dir.x = -1;
-                move(dir);
-                onepress = 3;
-            }
-            if (this.cursors.left.isDown && onepress == 1){
-                dir.x = 1;
-                move(dir);
-                onepress = 4;
-            }
-            if (this.cursors.down.isDown && onepress == 1){
-                dir.y = -1;
-                move(dir);
-                onepress = 5;
-            }
-            if (this.cursors.up.isDown && onepress == 1){
-                dir.y = 1;
-                move(dir);
-                onepress = 2;
-            }
-        }
-        if (onepress == 2 && this.cursors.down.isUp) {
-          onepress = 1;
-        }
-        else if (tutorial > 6 && (tutorial % 2) == 1)
-          updateTutorial();
-        else if (enterK.isDown && onepress == 1){
-          cheat++;
-        }
-        else if (cheat > 420){
-          cheat = 0;
-          victory();
-          onpress = 1;
-        }
-        if (losing == 0){
-          dir.x = 0;
-          dir.y = 0;
-
-          if (reverse == 0) {
-              if (swipe == 0)
-                  EndSwipe(reverse);
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          else {
-              if (swipe == 0)
-                EndSwipe(reverse);
-              if (this.cursors.right.isDown && onepress == 1){
-                  dir.x = -1;
-                  move(dir);
-                  onepress = 3;
-              }
-              if (this.cursors.left.isDown && onepress == 1){
-                  dir.x = 1;
-                  move(dir);
-                  onepress = 4;
-              }
-              if (this.cursors.down.isDown && onepress == 1){
-                  dir.y = -1;
-                  move(dir);
-                  onepress = 5;
-              }
-              if (this.cursors.up.isDown && onepress == 1){
-                  dir.y = 1;
-                  move(dir);
-                  onepress = 2;
-              }
-          }
-          if (onepress == 2 && this.cursors.down.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 3 && this.cursors.left.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 4 && this.cursors.right.isUp) {
-            onepress = 1;
-          }
-          if (onepress == 5 && this.cursors.up.isUp) {
-            onepress = 1;
-          }
-        }
-    }
-
-    }
-
+      update_state_level();
   }
 };
 
