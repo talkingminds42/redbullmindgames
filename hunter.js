@@ -184,13 +184,11 @@ var Airstate = {
     game.load.spritesheet('reverse', 'assets/Air/bloc_reverse.png', 100, 100, 4);
     game.load.image('umbrella', 'assets/Air/bloc_umbrella.png');
     game.load.image('sun', 'assets/Air/bloc_light.png');
-    game.load.image('items', 'assets/items.png');
-    game.load.image('button_background', 'assets/button_background.png');
 
     //game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
     //game.load.image('background', 'assets/background.png');
-    game.load.image('d_red', 'assets/Air/AirTab.png');
+    game.load.image('d_red', 'assets/Air/d_green.png');
     //game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png')
 
@@ -199,6 +197,12 @@ var Airstate = {
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
+    game.load.image('score', 'assets/score.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
+
+    game.load.image('collect', 'assets/collect.png');
+    game.load.image('instruction', 'assets/instruction.png');
   },
 
   create: function () {
@@ -234,7 +238,7 @@ var Waterstate = {
     game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
     game.load.image('background', 'assets/background.png');
-    game.load.image('d_red', 'assets/Water/WaterTab.png');
+    game.load.image('d_red', 'assets/Water/d_blue.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
     game.load.image('items', 'assets/items.png');
@@ -246,6 +250,11 @@ var Waterstate = {
     game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
     game.load.image('score', 'assets/score.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
+
+    game.load.image('collect', 'assets/collect.png');
+    game.load.image('instruction', 'assets/instruction.png');
   },
 
   create: function () {
@@ -290,6 +299,9 @@ var Earthstate = {
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
+
+    game.load.image('collect', 'assets/collect.png');
+    game.load.image('instruction', 'assets/instruction.png');
   },
 
   create: function () {
@@ -331,7 +343,7 @@ var Firestate = {
     game.load.image('stone', 'assets/Fire/FireTab.png');
     game.load.image('diamond_blue', 'assets/Fire/bloc_blue.png');
     game.load.image('diamond_green', 'assets/Fire/bloc_green.png');
-    game.load.image('diamond_orange', 'assets/Fire/block_black.png');
+    game.load.image('diamond_orange', 'assets/Fire/bloc_black.png');
     game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
     game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
     game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
@@ -345,6 +357,7 @@ var Firestate = {
     game.load.image('d_yellow', 'assets/Fire/d_yellow.png');
     game.load.image('d_white', 'assets/Fire/d_grey.png');
     game.load.image('d_violet', 'assets/Fire/d_purple.png');
+    game.load.image('d_check', 'assets/validate.png');
 
     game.load.image('b_up_left', 'assets/background_ui_up_left.png');
     game.load.image('help', 'assets/help.png');
@@ -354,6 +367,9 @@ var Firestate = {
     game.load.image('score', 'assets/score.png');
     game.load.image('items', 'assets/items.png');
     game.load.image('button_background', 'assets/button_background.png');
+
+    game.load.image('collect', 'assets/collect.png');
+    game.load.image('instruction', 'assets/instruction.png');
   },
 
   create: function () {
@@ -483,7 +499,7 @@ function destroying(){
     groupsun.removeAll();
   }
   groupdiamonds.removeAll();
-  draw_rectangle();
+  //draw_rectangle();
   groupoverdiamond.removeAll();
 }
 

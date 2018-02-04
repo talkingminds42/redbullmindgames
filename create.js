@@ -44,13 +44,14 @@ function create_state_level()
       game.add.text(M_left + 905, 718, "RETRY", {font:"18px arial"});
       help = game.add.button(M_left + 888,  750, 'button_background', helpButton, this).scale.setTo(1,1);
       game.add.text(M_left + 905, 758, "HELP", {font:"18px arial"});
-      game.add.image( 10, 10, 'b_up_left').scale.setTo(2,1);
+      game.add.image( 10, 10, 'b_up_left').scale.setTo(1,2);
       score_img = game.add.image( 20, 20, 'score').scale.setTo(0.4,0.4);
       scoreText = game.add.text(70, 25, '0', { fontSize: '32px', fill: '#000' });
+      game.add.image( 10, 680, 'collect').scale.setTo(1,1);
+      game.add.image( 380, 710, 'instruction').scale.setTo(1,1);
       //game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
       //credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
       items = game.add.image( M_left + 850,  10, 'items').scale.setTo(1,1);
-      text = game.add.text(M_left + 115, M_top + 625, "Use arrow keys or swipe your screen to help hera finding elements gems.", {font:"18px arial"});
 
 
     }

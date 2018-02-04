@@ -88,25 +88,25 @@ function print_diamond()
 function print_check_diamond()
 {
     var pos_x = 0;
-    var pos_y = 740;
+    var pos_y = 680;
     var y = 1;
 
-    groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_check').scale.setTo(0.3, 0.3);
+    groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_check').scale.setTo(0.1, 0.1);
 }
 
 function print_wrong_diamond()
 {
     var pos_x = 0;
-    var pos_y = 740;
+    var pos_y = 680;
     var y = 1;
 
-    groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_wrong').scale.setTo(0.3, 0.3);
+    //groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_wrong').scale.setTo(0.3, 0.3);
 }
 
 function draw_rectangle()
 {
-    var graphics = game.add.graphics();
+    /*var graphics = game.add.graphics();
     graphics.beginFill(0x000000);
-    graphics.drawRect(0, 770, 270, 30);
-    window.graphics = graphics;
+    graphics.drawRect(0, 770, 270, 30);*/
+    //window.graphics = graphics;
 }
