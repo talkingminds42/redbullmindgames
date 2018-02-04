@@ -123,6 +123,8 @@ var bootstate = {
     game.load.image('volcano', 'assets/volcano.png');
     game.load.image('title', 'assets/title.png');
     game.load.image('catchPhrase', 'assets/catchPhrase.png');
+    game.load.image('b_up_left', 'assets/background_ui_up_left.png');
+    game.load.image('score', 'assets/score.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
@@ -132,6 +134,9 @@ var bootstate = {
     Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
     Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
     creditbutton = game.add.button(1050, 20, 'creditsbutton', creditsclick, this);
+    game.add.image( 10, 10, 'b_up_left').scale.setTo(1,2);
+    score_img = game.add.image( 20, 20, 'score').scale.setTo(0.4,0.4);
+    scoreText = game.add.text(70, 25, score, { fontSize: '32px', fill: '#000' });
       //console.log('bootstate created');
     planet =  game.add.image(M_left + 130, M_top, 'planet');
     if ((planetState & 0x01))
@@ -206,6 +211,7 @@ var Airstate = {
 
     game.load.image('collect', 'assets/collect.png');
     game.load.image('instruction', 'assets/instruction.png');
+    game.load.image('d_check', 'assets/validate.png');
   },
 
   create: function () {
@@ -258,6 +264,7 @@ var Waterstate = {
 
     game.load.image('collect', 'assets/collect.png');
     game.load.image('instruction', 'assets/instruction.png');
+    game.load.image('d_check', 'assets/validate.png');
   },
 
   create: function () {
@@ -305,6 +312,7 @@ var Earthstate = {
 
     game.load.image('collect', 'assets/collect.png');
     game.load.image('instruction', 'assets/instruction.png');
+    game.load.image('d_check', 'assets/validate.png');
   },
 
   create: function () {

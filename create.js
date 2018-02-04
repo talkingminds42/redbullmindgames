@@ -2,7 +2,6 @@ var b_1st_create = 0;
 
 function create_state_level()
 {
-    console.log('CREATE SHEET');
     document.getElementById("body").addEventListener("click", ClickEvent);
     game.input.addPointer();
     game.input.onUp.add(function ()

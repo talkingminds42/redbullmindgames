@@ -8,7 +8,6 @@ function update_state_level()
     }
     else if (cheat > 20){
     	cheat = 0;
-    	victory();
     	onpress = 1;
     }
       else if (losing == 0){
