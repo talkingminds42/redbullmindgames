@@ -213,6 +213,7 @@ var Waterstate = {
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
+    game.load.image('score', 'assets/score.png');
   },
 
   create: function () {
@@ -275,7 +276,7 @@ var Firestate = {
     game.load.image('hole', 'assets/Fire/bloc_black.png');
       game.load.spritesheet('storm', 'assets/Fire/lightning.png', 100, 100, 4);
     game.load.image('lightning_light', 'assets/Fire/lightning_light.png');
-    game.load.image('stone', 'assets/Fire/FireTab.png');
+
     game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);
     game.load.image('lock', 'assets/Fire/bloc_locker.png');
     game.load.image('key', 'assets/Fire/bloc_key.png');
@@ -290,21 +291,33 @@ var Firestate = {
     game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
     game.load.image('background', 'assets/background.png');
-    game.load.image('d_red', 'assets/Fire/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+
+    game.load.image('stone', 'assets/Fire/FireTab.png');
     game.load.image('diamond_blue', 'assets/Fire/bloc_blue.png');
     game.load.image('diamond_green', 'assets/Fire/bloc_green.png');
-    game.load.image('diamond_orange', 'assets/Fire/Tab_black.png');
+    game.load.image('diamond_orange', 'assets/Fire/block_black.png');
     game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
     game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
     game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
+
+    game.load.image('d_red', 'assets/Fire/d_orange.png');
+    game.load.image('d_blue', 'assets/Fire/d_blue.png');
+    game.load.image('d_green', 'assets/Fire/d_green.png');
+    game.load.image('d_orange', 'assets/Fire/d_black.png');
+    game.load.image('d_yellow', 'assets/Fire/d_yellow.png');
+    game.load.image('d_white', 'assets/Fire/d_grey.png');
+    game.load.image('d_violet', 'assets/Fire/d_purple.png');
 
     game.load.image('b_up_left', 'assets/background_ui_up_left.png');
     game.load.image('help', 'assets/help.png');
     game.load.image('button_key', 'assets/button_key.png');
     game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
+    game.load.image('score', 'assets/score.png');
+    game.load.image('items', 'assets/items.png');
+    game.load.image('button_background', 'assets/button_background.png');
   },
 
   create: function () {
@@ -362,14 +375,7 @@ function create() {
   groupoverdiamond=game.add.group();
   losing = 0;
   cheat = 0;
-  if (hide == 0)
-    drawMap();
-  else
-    hideMap();
-  hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
-  hera.scale.setTo(0.5, 0.5);
-  var animation = hera.animations.add('animation');
-  hera.animations.play('animation', 10, true);
+
   if (createinit == 0)
   {
     createinit = 1;
@@ -388,6 +394,14 @@ function create() {
     text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
     console.log('Test');
   }
+  if (hide == 0)
+    drawMap();
+  else
+    hideMap();
+    hera = groupgamer.create(((player.x * 50) + M_left), ((player.y * 50) +  M_top), 'hera');
+    hera.scale.setTo(0.5, 0.5);
+    var animation = hera.animations.add('animation');
+    hera.animations.play('animation', 10, true);
   game.input.onTap.add(onTap, this);
   player_diamond = 0;
   if (timer == -1)

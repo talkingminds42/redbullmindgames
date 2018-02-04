@@ -51,7 +51,7 @@ function creditsclick(){
 function print_diamond()
 {
     var pos_x = 0;
-    var pos_y = 740;
+    var pos_y = 680;
     var i = 1;
     var x = 1;
     var y = 1;
@@ -60,26 +60,26 @@ function print_diamond()
     while (i <= tab_diamond[level][0])
     {
         if (tab_diamond[level][i] == 3){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_red').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_red').scale.setTo(0.4, 0.4);
         }
         else if (tab_diamond[level][i] == 13){
-            test = groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_blue').scale.setTo(0.3, 0.3);
+            test = groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_blue').scale.setTo(0.4, 0.4);
             console.log("hello sir");
         }
         else if (tab_diamond[level][i] == 14){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_green').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_green').scale.setTo(0.4, 0.4);
         }
         else if (tab_diamond[level][i] == 15){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_orange').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_orange').scale.setTo(0.4, 0.4);
         }
         else if (tab_diamond[level][i] == 16){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_yellow').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_yellow').scale.setTo(0.4, 0.4);
         }
         else if (tab_diamond[level][i] == 17){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_white').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_white').scale.setTo(0.4, 0.4);
         }
         else if (tab_diamond[level][i] == 18){
-            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_violet').scale.setTo(0.3, 0.3);
+            groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_violet').scale.setTo(0.4, 0.4);
         }
         i++;
     }

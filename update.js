@@ -62,8 +62,6 @@ function update_state_level()
         if (onepress == 2 && cursors.down.isUp) {
           onepress = 1;
         }
-        else if (tutorial > 6 && (tutorial % 2) == 1)
-          updateTutorial();
         else if (enterK.isDown && onepress == 1){
           cheat++;
         }
