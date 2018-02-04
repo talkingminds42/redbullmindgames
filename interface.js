@@ -91,7 +91,7 @@ function print_check_diamond()
     var pos_y = 680;
     var y = 1;
 
-    groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_check').scale.setTo(0.1, 0.1);
+    groupoverdiamond.create((((player_diamond + 1) * 30)) + pos_x, ((y * 30) + pos_y), 'd_check').scale.setTo(0.2, 0.2);
 }
 
 function print_wrong_diamond()
