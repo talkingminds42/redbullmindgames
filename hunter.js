@@ -25,6 +25,9 @@ var M_left = 200;
 
 //level used
 var level = 0;
+var Airlevel = 6;
+var Waterlevel = 6;
+var Firelevel = 6;
 
 
 //score
@@ -102,15 +105,15 @@ var bootstate = {
     game.load.image('Waterbutton', 'assets/water_button.png');
     game.load.image('Earthbutton', 'assets/earth_button.png');
     game.load.image('Firebutton', 'assets/fire_button.png');
+    game.load.image('about', 'assets/aboutus.png');
     game.load.image('creditsbutton', 'assets/credit_button.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
-    Airbutton = game.add.button(game.world.centerX - 130, 500, 'Airbutton', AirOnClick, this);
-    Waterbutton = game.add.button(game.world.centerX - 130, 550, 'Waterbutton', WaterOnClick, this);
-    Earthbutton = game.add.button(game.world.centerX - 130, 600, 'Earthbutton', EarthOnClick, this);
-    Firebutton = game.add.button(game.world.centerX - 130, 650, 'Firebutton', FireOnClick, this);
-    creditbutton = game.add.button(1050, 20, 'creditsbutton', creditOnClick, this);
+    Airbutton = game.add.button(game.world.centerX - 130, 600, 'Airbutton', AirOnClick, this);
+    Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
+    Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
+    creditbutton = game.add.button(1050, 20, 'creditsbutton', creditsclick, this);
       //console.log('bootstate created');
   },
 
@@ -1127,10 +1130,6 @@ function EarthOnClick(){
 
 function FireOnClick(){
    game.state.start('Firestate');
-}
-
-function creditOnClick(){
-   // yoooollloooooooo
 }
 
 

@@ -4,7 +4,7 @@
 function creditsclick(){
   if (creditsbool == 0){
   creditsbool = 1;
-  about =  game.add.image(M_left + 75, M_top + 60, 'about');
+  about =  game.add.image(M_left + 150, M_top + 60, 'about');
   }
   else {
     creditsbool = 0;
