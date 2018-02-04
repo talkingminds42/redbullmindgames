@@ -31,12 +31,18 @@ function helpButton()
 
 function creditsclick(){
   if (creditsbool == 0){
-  creditsbool = 1;
-  about =  game.add.image(M_left + 75, M_top + 60, 'about');
+    creditsbool = 1;
+    about =  game.add.image(M_left + 150, M_top + 60, 'about');
+    Airbutton.kill();
+    Waterbutton.kill();
+    Firebutton.kill();
   }
   else {
     creditsbool = 0;
     about.kill();
+    Airbutton = game.add.button(game.world.centerX - 130, 600, 'Airbutton', AirOnClick, this);
+    Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
+    Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
   }
 }
 

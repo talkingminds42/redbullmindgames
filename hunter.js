@@ -25,6 +25,9 @@ var M_left = 200;
 
 //level used
 var level = 0;
+var Airlevel = 8;
+var Waterlevel = 8;
+var Firelevel = 8;
 
 
 //score
@@ -102,15 +105,26 @@ var bootstate = {
     game.load.image('Waterbutton', 'assets/water_button.png');
     game.load.image('Earthbutton', 'assets/earth_button.png');
     game.load.image('Firebutton', 'assets/fire_button.png');
+    game.load.image('about', 'assets/aboutus.png');
     game.load.image('creditsbutton', 'assets/credit_button.png');
+    game.load.image('BackgoundMenu', 'assets/MenuBackground.png');
+    game.load.image('MenuText', 'assets/MenuText.png');
+    game.load.image('BacktoMenu', 'assets/BacktoMenu.png');
+    game.load.image('lvl1', 'assets/lvl1.png');
+    game.load.image('lvl2', 'assets/lvl2.png');
+    game.load.image('lvl3', 'assets/lvl3.png');
+    game.load.image('lvl4', 'assets/lvl4.png');
+    game.load.image('lvl5', 'assets/lvl5.png');
+    game.load.image('lvl6', 'assets/lvl6.png');
+    game.load.image('lvl7', 'assets/lvl7.png');
+    game.load.image('lvl8', 'assets/lvl8.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
-    Airbutton = game.add.button(game.world.centerX - 130, 500, 'Airbutton', AirOnClick, this);
-    Waterbutton = game.add.button(game.world.centerX - 130, 550, 'Waterbutton', WaterOnClick, this);
-    Earthbutton = game.add.button(game.world.centerX - 130, 600, 'Earthbutton', EarthOnClick, this);
-    Firebutton = game.add.button(game.world.centerX - 130, 650, 'Firebutton', FireOnClick, this);
-    creditbutton = game.add.button(1050, 20, 'creditsbutton', creditOnClick, this);
+    Airbutton = game.add.button(game.world.centerX - 130, 600, 'Airbutton', AirOnClick, this);
+    Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
+    Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
+    creditbutton = game.add.button(1050, 20, 'creditsbutton', creditsclick, this);
       //console.log('bootstate created');
   },
 
@@ -312,32 +326,7 @@ game.state.add('Earthstate', Earthstate);
 game.state.add('Firestate', Firestate);
 
 game.state.start('bootstate');
-function AirOnClick(){
-    game.state.start('Airstate');
-}
 
-function WaterOnClick(){
-    game.state.start('Waterstate');
-}
-
-function EarthOnClick(){
-    game.state.start('Earthstate');
-}
-
-function FireOnClick(){
-   game.state.start('Firestate');
-}
-
-function creditOnClick(){
-   // yoooollloooooooo
-}
-
-
-function ClickEvent()
-{
-    console.log("click event");
-    click = 1;
-}
 
 function preload() {
 
