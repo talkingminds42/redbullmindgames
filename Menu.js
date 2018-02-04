@@ -32,6 +32,14 @@ function FireOnClick(){
 function backtoMenu(){
   MenuText.kill();
   BacktoMenu.kill();
+  lvl1.kill();
+  lvl2.kill();
+  lvl3.kill();
+  lvl4.kill();
+  lvl5.kill();
+  lvl6.kill();
+  lvl7.kill();
+  lvl8.kill();
   Airbutton = game.add.button(game.world.centerX - 130, 600, 'Airbutton', AirOnClick, this);
   Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
   Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);
@@ -46,5 +54,5 @@ function ClickEvent()
 
 function levelbutton(level)
 {
-  
+
 }
