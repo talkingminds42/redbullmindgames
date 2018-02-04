@@ -94,8 +94,8 @@ function playerclear()
         key = 1;
         losing = 1;
         map[player.y][player.x] = 1;
-        keyButton = game.add.image(15, 50, 'button_key');
-        keyButton.scale.setTo(0.3, 0.3);
+        keyButton = game.add.image(855 + M_left, 15, 'button_key');
+        keyButton.scale.setTo(1, 1);
         var Tweenkey = game.add.tween(keyitem).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
         Tweenkey.onComplete.addOnce(function(){
           grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);
@@ -147,8 +147,8 @@ function playerclear()
       if (reverse == 0)
           reverseButton.kill();
       else {
-        reverseButton = game.add.image(50, 50, 'button_reverse');
-        reverseButton.scale.setTo(0.3, 0.3);
+        reverseButton = game.add.image(897 + M_left, 15, 'button_reverse');
+        reverseButton.scale.setTo(1, 1);
       }
       //---------------------------
 
@@ -166,8 +166,8 @@ function playerclear()
         umbrella = 1;
         losing = 1;
         map[player.y][player.x] = 1;
-        umbrellaButton = game.add.image(85, 50, 'button_umbrella');
-        umbrellaButton.scale.setTo(0.3, 0.3);
+        umbrellaButton = game.add.image(940 + M_left, 15, 'button_umbrella');
+        umbrellaButton.scale.setTo(1, 1);
         var Tweenumbrella = game.add.tween(umbrellaitem).to({x:((player.x * 50) + M_left),y:((player.y * 50) + M_top)},300);
         Tweenumbrella.onComplete.addOnce(function(){
           grouphidden.create(((player.x * 50) + M_left), ((player.y * 50) + M_top), 'tile').scale.setTo(0.5, 0.5);

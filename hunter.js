@@ -137,6 +137,7 @@ var bootstate = {
 
 var timer = -1;
 
+
 var Airstate = {
 
   preload: function () {
@@ -149,13 +150,15 @@ var Airstate = {
     game.load.image('lock', 'assets/Air/bloc_locker.png');
     game.load.image('key', 'assets/Air/bloc_key.png');
     game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('button_umbrella', 'assets/button_umbrella.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
     game.load.image('hide', 'assets/Air/bloc_hidden.png');
     game.load.image('titre', 'assets/jagerhunter.png');
     game.load.spritesheet('reverse', 'assets/Air/bloc_reverse.png', 100, 100, 4);
     game.load.image('umbrella', 'assets/Air/bloc_umbrella.png');
     game.load.image('sun', 'assets/Air/bloc_light.png');
-    game.load.image('credits', 'assets/button_info.png');
+    game.load.image('items', 'assets/items.png');
+    //game.load.image('credits', 'assets/button_info.png');
     game.load.image('about', 'assets/aboutus.png');
     game.load.image('background', 'assets/background.png');
     game.load.image('d_red', 'assets/Air/AirTab.png');
@@ -204,13 +207,14 @@ var Airstate = {
       score = 0;
       scoreText = game.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#fff' });
       enterK = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      //  title = block0_0 = game.add.image(400, 0, 'titre');
+      title = block0_0 = game.add.image(400, 0, 'titre');
       background = game.add.image(M_left + 100, M_top + 610, 'background');
       arrow = game.add.image(M_left + 300, M_top + 435, 'arrow');
       game.add.image( 10, M_top + 600, 'order').scale.setTo(0.5,0.5);
-      credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
+      //credits = game.add.button(M_left + 900,  35, 'credits', creditsclick, this).scale.setTo(0.5,0.5);
+      items = game.add.button(M_left + 850,  10, 'items', creditsclick, this).scale.setTo(1,1);
       text = game.add.text(M_left + 115, M_top + 625, "Hello hera Hunter ! Welcome to your treasure hunt.\nPress enter to continue...", {font:"18px arial"});
-      console.log('Test');
+      //console.log('Test');
     }
     game.input.onTap.add(onTap, this);
     player_diamond = 0;
