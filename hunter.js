@@ -100,7 +100,6 @@ var game = new Phaser.Game(1200, 800, Phaser.AUTO, '', { preload: preload, creat
 
 var bootstate = {
   preload: function() {
-    game.load.image('playbutton', 'assets/playbutton.jpeg');
     game.load.image('Airbutton', 'assets/air_button.png');
     game.load.image('Waterbutton', 'assets/water_button.png');
     game.load.image('Earthbutton', 'assets/earth_button.png');
@@ -122,9 +121,13 @@ var bootstate = {
     game.load.image('planet', 'assets/planet.png');
     game.load.image('water', 'assets/water.png');
     game.load.image('volcano', 'assets/volcano.png');
+    game.load.image('title', 'assets/title.png');
+    game.load.image('catchPhrase', 'assets/catchPhrase.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
+    title =  game.add.image(M_left + 100, -10, 'title').scale.setTo(0.5,0.5);
+    catchPhrase =  game.add.image(M_left + 150, 750, 'catchPhrase');
     Airbutton = game.add.button(game.world.centerX - 130, 600, 'Airbutton', AirOnClick, this);
     Waterbutton = game.add.button(game.world.centerX - 130, 650, 'Waterbutton', WaterOnClick, this);
     Firebutton = game.add.button(game.world.centerX - 130, 700, 'Firebutton', FireOnClick, this);

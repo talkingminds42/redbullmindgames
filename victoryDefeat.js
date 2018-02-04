@@ -55,6 +55,7 @@ function defeat(){
       Tweenstorm.start();
     }
     else {
+      key = 0;
       losing = 5;
       resetButton();
       var gameOver = game.add.text(game.world.centerX, game.world.centerY - 500, 'Game Over!', { fill : '#e22', align: "center" } );
