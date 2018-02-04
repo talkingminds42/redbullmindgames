@@ -25,7 +25,7 @@ var M_left = 200;
 
 //level used
 var level = 0;
-var levelmax = 24;
+
 
 //score
 var score = 0;
@@ -862,11 +862,12 @@ var Firestate = {
     game.load.image('hole', 'assets/Fire/bloc_black.png');
       game.load.spritesheet('storm', 'assets/Fire/lightning.png', 100, 100, 4);
     game.load.image('lightning_light', 'assets/Fire/lightning_light.png');
-    game.load.image('stone', 'assets/Fire/WaterTab.png');
+    game.load.image('stone', 'assets/Fire/FireTab.png');
     game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);
     game.load.image('lock', 'assets/Fire/bloc_locker.png');
     game.load.image('key', 'assets/Fire/bloc_key.png');
     game.load.image('button_key', 'assets/button_key.png');
+    game.load.image('break', 'assets/Fire/bloc_break.png');
     game.load.image('button_reverse', 'assets/button_reverse.png');
     game.load.image('hide', 'assets/Fire/bloc_hidden.png');
     game.load.image('titre', 'assets/jagerhunter.png');
@@ -879,6 +880,12 @@ var Firestate = {
     game.load.image('d_red', 'assets/Fire/WaterTab.png');
     game.load.image('arrow', 'assets/arrowred.png');
     game.load.image('order', 'assets/order.png');
+    game.load.image('diamond_blue', 'assets/Fire/bloc_blue.png');
+    game.load.image('diamond_green', 'assets/Fire/bloc_green.png');
+    game.load.image('diamond_orange', 'assets/Fire/Tab_black.png');
+    game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
+    game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
+    game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
   },
 
   create: function () {

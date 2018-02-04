@@ -1,4 +1,5 @@
-var tab_score = new Array(30); // nombre de niveau
+var levelmax = 25;
+var tab_score = new Array(levelmax); // nombre de niveau
 tab_score.fill(-1);
 
 // init map
