@@ -25,9 +25,9 @@ var M_left = 200;
 
 //level used
 var level = 0;
-var Airlevel = 6;
-var Waterlevel = 6;
-var Firelevel = 6;
+var Airlevel = 8;
+var Waterlevel = 8;
+var Firelevel = 8;
 
 
 //score
@@ -107,6 +107,17 @@ var bootstate = {
     game.load.image('Firebutton', 'assets/fire_button.png');
     game.load.image('about', 'assets/aboutus.png');
     game.load.image('creditsbutton', 'assets/credit_button.png');
+    game.load.image('BackgoundMenu', 'assets/MenuBackground.png');
+    game.load.image('MenuText', 'assets/MenuText.png');
+    game.load.image('BacktoMenu', 'assets/BacktoMenu.png');
+    game.load.image('lvl1', 'assets/lvl1.png');
+    game.load.image('lvl2', 'assets/lvl2.png');
+    game.load.image('lvl3', 'assets/lvl3.png');
+    game.load.image('lvl4', 'assets/lvl4.png');
+    game.load.image('lvl5', 'assets/lvl5.png');
+    game.load.image('lvl6', 'assets/lvl6.png');
+    game.load.image('lvl7', 'assets/lvl7.png');
+    game.load.image('lvl8', 'assets/lvl8.png');
   },
   create: function () {
     game.stage.backgroundColor = "#b6d2f4";
