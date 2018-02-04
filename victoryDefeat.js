@@ -11,7 +11,7 @@ function victory(){
         score += tmp;
         if (tab_score[level] < tmp)
             tab_score[level] = tmp;
-        scoreText.text = 'Score: ' + score;
+        scoreText.text = score;
         console.log(tab_score);
         level++;
         if (level == 8)
