@@ -1,4 +1,9 @@
 
+function createInterface()
+{
+    
+}
+
 // fonction pour faire apparaitre le about (en haut a droit)
 
 function creditsclick(){
