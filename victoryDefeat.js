@@ -67,7 +67,7 @@ function defeat(){
         score -= 20;
         if (score < 0)
             score = 0;
-        scoreText.text = 'Score: ' + score;
+        scoreText.text = score;
         create();
       });
       Tweendefeat.start();
