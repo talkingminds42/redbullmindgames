@@ -96,6 +96,7 @@ var click = 0;
 var planetState = 0;
 
 // initialise Phaser
+// 1200 800
 var game = new Phaser.Game(1200, 800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 var bootstate = {
@@ -127,6 +128,12 @@ var bootstate = {
     game.load.image('score', 'assets/score.png');
   },
   create: function () {
+      //scaling options
+    this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+
+    //have the game centered horizontally
+    this.scale.pageAlignHorizontally = true;
+    this.scale.pageAlignVertically = true;
     game.stage.backgroundColor = "#b6d2f4";
     title =  game.add.image(M_left + 100, -10, 'title').scale.setTo(0.5,0.5);
     catchPhrase =  game.add.image(M_left + 150, 750, 'catchPhrase');
