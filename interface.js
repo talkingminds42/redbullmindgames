@@ -6,6 +6,14 @@ function createInterface()
 
 function menuButton()
 {
+  if (key == 1){
+    key = 0;
+    keyButton.kill();
+  }
+  resetButton();
+  hide = 0;
+  destroying();
+  create();
     game.state.start('bootstate');
     createinit = 0;
 }
@@ -56,7 +64,7 @@ function print_diamond()
     var x = 1;
     var y = 1;
 
-    console.log(level);
+    // console.log(level);
     while (i <= tab_diamond[level][0])
     {
         if (tab_diamond[level][i] == 3){
@@ -64,7 +72,7 @@ function print_diamond()
         }
         else if (tab_diamond[level][i] == 13){
             test = groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_blue').scale.setTo(0.4, 0.4);
-            console.log("hello sir");
+            // console.log("hello sir");
         }
         else if (tab_diamond[level][i] == 14){
             groupdiamonds.create(((i * 30)) + pos_x, ((y * 30) + pos_y), 'd_green').scale.setTo(0.4, 0.4);

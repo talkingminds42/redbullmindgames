@@ -354,7 +354,7 @@ var Firestate = {
     game.load.image('stone', 'assets/Fire/FireTab.png');
     game.load.image('diamond_blue', 'assets/Fire/bloc_blue.png');
     game.load.image('diamond_green', 'assets/Fire/bloc_green.png');
-    game.load.image('diamond_orange', 'assets/Fire/bloc_black.png');
+    game.load.image('diamond_orange', 'assets/Fire/Tab_black.png');
     game.load.image('diamond_yellow', 'assets/Fire/bloc_yellow.png');
     game.load.image('diamond_white', 'assets/Fire/bloc_grey.png');
     game.load.image('diamond_violet', 'assets/Fire/bloc_purple.png');
