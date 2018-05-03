@@ -331,7 +331,7 @@ var Firestate = {
   preload: function () {
     game.load.image('tile', 'assets/Fire/lava.png');
     game.load.image('hole', 'assets/Fire/bloc_black.png');
-      game.load.spritesheet('storm', 'assets/Fire/lightning.png', 100, 100, 4);
+    game.load.spritesheet('storm', 'assets/Fire/lightning.png', 100, 100, 4);
     game.load.image('lightning_light', 'assets/Fire/lightning_light.png');
 
     game.load.spritesheet('hera', 'assets/Hera.png', 100, 100, 11);

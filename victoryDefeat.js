@@ -37,6 +37,7 @@ function victory(){
         create();
       }
     });
+    parent.postMessage("gameOver:" + gameState + ":100", "*");
     Tweenvictory.start();
 }
 
@@ -55,7 +56,10 @@ function defeat(){
       Tweenstorm.start();
     }
     else {
-      key = 0;
+      if (key == 1){
+        key = 0;
+        keyButton.kill();
+      }
       losing = 5;
       resetButton();
       var gameOver = game.add.text(game.world.centerX, game.world.centerY - 500, 'Game Over!', { fill : '#e22', align: "center" } );
@@ -70,6 +74,7 @@ function defeat(){
         scoreText.text = score;
         create();
       });
+      parent.postMessage("gameOver:" + gameState + ":0", "*");
       Tweendefeat.start();
     }
 }
