@@ -97,7 +97,7 @@ var planetState = 0;
 
 // initialise Phaser
 // 1200 800
-var game = new Phaser.Game(1200, 800, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1200, 800, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
 
 var bootstate = {
   preload: function() {
